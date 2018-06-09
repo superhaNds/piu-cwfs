@@ -2,7 +2,7 @@
 -- In the category of ΠU-ucwfs with ΠU-ucwf morphisms that preserved structure, a proof of isomorphism
 -- between two ΠU-ucwfs; one with explicit and one with implicit substitutions.
 ------------------------------------------------------------------------------------------------------
-module Iso-PiUcwf where
+module Extrinsic.Iso-PiUcwf where
 
 open import Data.Nat renaming (ℕ to Nat)
 open import Data.Fin using (Fin ; zero ; suc)
@@ -11,12 +11,12 @@ open import Relation.Binary
 open import Function using (_$_)
 open import Relation.Binary.PropositionalEquality as P hiding ([_] ; cong-app)
 import Relation.Binary.EqReasoning as EqR
-open import Ucwf
-open import ExpSubLam
+open import Extrinsic.Ucwf
+open import Extrinsic.ExpSubLam
   renaming (Tm to Tm-cwf ; Sub to Sub-cwf ; q to q⋆ ; p to p⋆ ; id to id⋆ ; _∘_ to _∘⋆_ ; _[_] to _[_]⋆)
-open import ImpSubLam
+open import Extrinsic.ImpSubLam
   renaming (Tm to Tm-λ ; Sub to Sub-λ) hiding (subComp ; idExt ; p-∘ ; cong-∘₁ ; subLam ; subΠ)
-open import ImpSub as Ren using (Ren)
+open import Extrinsic.ImpSub as Ren using (Ren)
 
 -- Ucwf morphism 1
 -- This is ucwf morphism by definition

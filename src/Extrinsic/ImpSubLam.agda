@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------------------------
 -- TODO
 ----------------------------------------------------------------------------------------
-module ImpSubLam where
+module Extrinsic.ImpSubLam where
 
 open import Data.Nat renaming (ℕ to Nat) using (_+_ ; suc ; zero)
 open import Data.Fin using (Fin ; suc ; zero)
@@ -12,9 +12,9 @@ open import Relation.Binary.PropositionalEquality hiding ([_])
 open import Relation.Binary.PropositionalEquality.Core
 open import Relation.Binary using (Setoid ; IsEquivalence)
 import Relation.Binary.EqReasoning as EqR
-open import Ucwf
+open import Extrinsic.Ucwf
 open ≡-Reasoning
-open import ImpSub as Ren using (Ren ; _∙_)
+open import Extrinsic.ImpSub as Ren using (Ren ; _∙_)
 
 infix  10 _,_
 infixl 10  _/_

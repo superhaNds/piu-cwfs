@@ -1,4 +1,4 @@
-module ImpSubTy where
+module Extrinsic.ImpSubTy where
 
 open import Function as F using (_$_ ; flip)
 open import Data.Nat renaming (ℕ to Nat)
@@ -7,8 +7,8 @@ open import Data.Vec hiding ([_] ; _∈_)
 open import Data.Vec.All as All using (All; []; _∷_)
 open import Data.Vec.All.Properties using (gmap)
 open import Relation.Binary.PropositionalEquality hiding ([_])
-open import ImpSubLam
-open import ImpSub as Ren using (Ren)
+open import Extrinsic.ImpSubLam
+open import Extrinsic.ImpSub as Ren using (Ren)
 
 data Ctx : Nat → Set where
   ⋄   : Ctx 0

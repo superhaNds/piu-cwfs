@@ -2,10 +2,10 @@
 -- The type system for a ΠU-cwf with explicit substitutions. It is constructed
 -- by an underlying ucwf, that is, with untyped conversion.
 --------------------------------------------------------------------------------------
-module ExpSubTy where
+module Extrinsic.ExpSubTy where
 
 open import Data.Nat renaming (ℕ to Nat)
-open import ExpSubLam
+open import Extrinsic.ExpSubLam
 open import Data.Product renaming (proj₁ to π₁ ; proj₂ to π₂) hiding (<_,_>)
 open import Function using (_$_)
 
@@ -171,4 +171,5 @@ ty-⇑ : ∀ {n m Γ Δ} {A} {γ : Sub m n}
        → (Γ ∙ A) ⊢ ⇑ γ ∈s (Δ ∙ (A [ γ ]))
 ty-⇑ ⊢A ⊢A[γ] ⊢γ = ⊢<,> (⊢∘ ⊢γ (⊢p ⊢A[γ])) ⊢A
                         (tm-conv (ty-sub ⊢A (⊢∘ ⊢γ (⊢p ⊢A[γ])))
-                        (tm-q ⊢A[γ]) subComp)       
+                        (tm-q ⊢A[γ]) subComp)
+                        

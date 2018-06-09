@@ -1,12 +1,12 @@
 -----------------------------------------------------------------------------------
 -- A ΠU-ucwf with explicit substitutions. 
 -----------------------------------------------------------------------------------
-module ExpSubLam where
+module Extrinsic.ExpSubLam where
 
 open import Data.Nat renaming (ℕ to Nat)
 open import Data.Product renaming (proj₁ to π₁ ; proj₂ to π₂) hiding (<_,_>)
 open import Relation.Binary
-open import Ucwf
+open import Extrinsic.Ucwf
 import Relation.Binary.EqReasoning as EqR
 
 -- Terms and substitutions are mutually defined

@@ -4,7 +4,7 @@
 -- Compare the notions of cartesian multicategory and Lawvere theory
 -- Note that it is more like a C-system than a D-system.
 -------------------------------------------------------------------------------
-module ImpSub where
+module Extrinsic.ImpSub where
 
 open import Data.Nat renaming (ℕ to Nat) using (_+_ ; suc ; zero)
 open import Data.Fin using (Fin ; suc ; zero)
@@ -12,7 +12,7 @@ open import Data.Vec hiding ([_])
 open import Data.Vec.Properties
 open import Function hiding (id)
 open import Relation.Binary.PropositionalEquality hiding ([_])
-open import Ucwf
+open import Extrinsic.Ucwf
 open ≡-Reasoning
 
 -------------------------------------------------------------------------------

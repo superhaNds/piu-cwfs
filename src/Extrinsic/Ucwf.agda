@@ -2,7 +2,7 @@
 -- The notions of unityped categories with families. Record descriptions
 -- of object, morphism, and isomorphism in the corresponding category
 ---------------------------------------------------------------------------
-module Ucwf where
+module Extrinsic.Ucwf where
 
 open import Agda.Primitive
 open import Data.Nat renaming (ℕ to Nat) using (zero ; suc)
@@ -198,7 +198,6 @@ record λβη-ucwf-≅ {λu₁ λu₂} (λu₁-⇒ : λβη-ucwf-⇒ λu₁ λu�
     
     left-inv-sub  : ∀ {m n} (σ : Sub₁ m n) → ⟦ ⟦ σ ⟧'₁ ⟧'₂ ≈₁ σ
     right-inv-sub : ∀ {m n} (σ : Sub₂ m n) → ⟦ ⟦ σ ⟧'₂ ⟧'₁ ≈₂ σ
-    
     
 record ΠU-ucwf : Set₁ where
   field
