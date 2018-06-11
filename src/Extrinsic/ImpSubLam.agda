@@ -106,7 +106,7 @@ _∘r_ : ∀ {m n k} → Sub m n → Ren k m → Sub k n
 
 lookup-p : ∀ {n} (i : Fin n) → lookup i p ≡ var (suc i)
 lookup-p i = begin
-  lookup i (map var (map suc Ren.id)) ≡⟨ Ren.lookup-map i var _ ⟩
+  lookup i (map var (map suc Ren.id)) ≡⟨ lookup-map i var _ ⟩
   var (lookup i (map suc Ren.id))     ≡⟨ cong var (Ren.lookup-p i) ⟩
   var (suc i)
   ∎
@@ -148,7 +148,7 @@ idExt = refl
 lookup-id : ∀ {n} (i : Fin n) → lookup i id ≡ var i
 lookup-id zero    = refl
 lookup-id (suc i) = begin
-  lookup i (map var Ren.p) ≡⟨ Ren.lookup-map i var Ren.p ⟩
+  lookup i (map var Ren.p) ≡⟨ lookup-map i var Ren.p ⟩
   var (lookup i Ren.p)     ≡⟨ cong var (Ren.lookup-p i) ⟩
   var (suc i)
   ∎
@@ -175,7 +175,7 @@ subId {t = Π A B} = begin
 
 /-asso : ∀ {m n k} (ρ : Ren m n) (τ : Ren k m) t → t / (ρ ∙ τ) ≡ (t / ρ) / τ
 /-asso ρ τ U         = refl
-/-asso ρ τ (var i)   = cong var (Ren.lookup-map i _ ρ)
+/-asso ρ τ (var i)   = cong var (lookup-map i _ ρ)
 /-asso ρ τ (app f t) = cong₂ app (/-asso ρ τ f) (/-asso ρ τ t)
 /-asso ρ τ (ƛ t)     = cong ƛ $ begin
   t / Ren.↑ (ρ ∙ τ)       ≡⟨ cong (t /_) (Ren.↑-dist ρ τ) ⟩
@@ -276,11 +276,11 @@ map-wk-p {σ = t ∷ σ} =
 ↑-r∘-dist : ∀ {m n k} (ρ : Ren m n) (σ : Sub k m) → ↑ (ρ r∘ σ) ≡ Ren.↑ ρ r∘ ↑ σ
 ↑-r∘-dist ρ σ = cong (_, q) (trans (sym (map-∘ _ _ ρ))
                      (sym $ trans (sym (map-∘ (flip lookup (↑ σ)) suc ρ))
-                                  (map-cong (λ i → Ren.lookup-map i weaken σ) ρ) ))
+                                  (map-cong (λ i → lookup-map i weaken σ) ρ) ))
 
 ∘r-asso : ∀ {m n k} (σ : Sub m n) (ρ : Ren k m) (t : Tm n) → t [ σ ∘r ρ ] ≡ (t [ σ ]) / ρ
 ∘r-asso _ _ U         = refl
-∘r-asso σ ρ (var i)   = Ren.lookup-map i (_/ ρ) σ
+∘r-asso σ ρ (var i)   = lookup-map i (_/ ρ) σ
 ∘r-asso σ ρ (app f t) = cong₂ app (∘r-asso σ ρ f) (∘r-asso σ ρ t)
 ∘r-asso σ ρ (ƛ t)     = cong ƛ $ begin
   t [ ↑ (σ ∘r ρ) ]       ≡⟨ cong (t [_]) (↑-∘r-dist _ _) ⟩
@@ -296,7 +296,7 @@ map-wk-p {σ = t ∷ σ} =
 
 r∘-asso : ∀ {m n k} (ρ : Ren m n) (σ : Sub k m) t → t [ ρ r∘ σ ] ≡ (t / ρ) [ σ ]
 r∘-asso _ _ U         = refl
-r∘-asso ρ σ (var i)   = Ren.lookup-map i (flip lookup σ) ρ
+r∘-asso ρ σ (var i)   = lookup-map i (flip lookup σ) ρ
 r∘-asso ρ σ (app f t) = cong₂ app (r∘-asso ρ σ f) (r∘-asso ρ σ t)
 r∘-asso ρ σ (ƛ t)     = cong ƛ $ begin
   t [ ↑ (ρ r∘ σ) ]      ≡⟨ cong (t [_]) (↑-r∘-dist ρ σ) ⟩
@@ -411,7 +411,7 @@ map-var-∘ ρ ρ' =
  in begin
    map-ρ ∘ map-ρ'                       ≡⟨⟩
    map (_[ map-ρ' ]) map-ρ              ≡⟨ sym $ map-∘ (_[ map-ρ' ]) var ρ ⟩
-   map (λ x → var x [ map-ρ' ]) ρ       ≡⟨ map-cong (λ x → Ren.lookup-map x var ρ') ρ ⟩
+   map (λ x → var x [ map-ρ' ]) ρ       ≡⟨ map-cong (λ x → lookup-map x var ρ') ρ ⟩
    map (λ x → var x / ρ') ρ             ≡⟨⟩
    map (λ x → var (lookup x ρ')) ρ      ≡⟨ map-∘ var (λ z → lookup z ρ') ρ ⟩
    map var (map (λ i → i Ren./ ρ') ρ)   ≡⟨⟩

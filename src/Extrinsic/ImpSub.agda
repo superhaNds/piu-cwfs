@@ -71,11 +71,6 @@ compExt : ∀ {m n k} (σ : Ren n m) (ρ : Ren k n) t
           → (t ∷ σ) ∙ ρ ≡ ((t / ρ) ∷ σ ∙ ρ )
 compExt _ _ _ = refl
 
-lookup-map : ∀ {a b n} {A : Set a} {B : Set b}
-             i (f : A → B) (xs : Vec A n) → lookup i (map f xs) ≡ f (lookup i xs)
-lookup-map zero    _ (_ ∷ _)  = refl
-lookup-map (suc i) f (x ∷ xs) = lookup-map i f xs
-
 -- lookup in id returns the input index
 
 lookup-id : ∀ {n} (i : Fin n) → lookup i id ≡ i
