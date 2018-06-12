@@ -172,4 +172,9 @@ ty-⇑ : ∀ {n m Γ Δ} {A} {γ : Sub m n}
 ty-⇑ ⊢A ⊢A[γ] ⊢γ = ⊢<,> (⊢∘ ⊢γ (⊢p ⊢A[γ])) ⊢A
                         (tm-conv (ty-sub ⊢A (⊢∘ ⊢γ (⊢p ⊢A[γ])))
                         (tm-q ⊢A[γ]) subComp)
-                        
+
+ty-∘-p : ∀ {m n Γ Δ} {A} {γ : Sub m n}
+         → Δ ⊢ A
+         → Γ ⊢ γ ∈s Δ
+         → Γ ⊢ γ ∘ p ∈s (Δ ∙ A)
+ty-∘-p ⊢B ⊢γ = ⊢∘ ⊢γ (⊢p ⊢B)         
