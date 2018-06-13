@@ -61,7 +61,8 @@ mutual
   stripsubeq cons-∘                = compExt
   stripsubeq pcons                 = p-∘
   stripsubeq (cong-∘ γ=γ' γ=γ'')   = cong-∘ (stripsubeq γ=γ') (stripsubeq γ=γ'')
-  stripsubeq (cong-cons γ=γ' a=a') = cong-<,> {!!} (stripsubeq γ=γ')
+  stripsubeq (cong-cons {a = a} {a'} γ=γ' a=a') = cong-<,> {! !} (stripsubeq γ=γ')
+    where a'' = transport a (cong-subT reflT γ=γ')
 
 mutual
 
@@ -78,7 +79,7 @@ mutual
   typingtm q                 = tm-q (typingty _)
   typingtm (a [ γ ]t)        = tm-sub (typingtm a) (typingsub γ)
   typingtm (ƛ a)             = tm-Π-I (typingty _) (typingty _) (typingtm a)
-  typingtm (transport a eq)  = {!!} 
+  typingtm (transport a eq)  = tm-conv (typingty _) (typingtm a) (sym~ (striptyeq eq)) 
   typingtm (app c a)         = tm-app (typingty _) (typingty _) (typingtm c) (typingtm a)
 
   typingsub : ∀ {m n} {Δ : Ctx⋆ m} {Γ : Ctx⋆ n} (γ : Sub Δ Γ) → stripctx Γ ⊢ stripsub γ ∈s stripctx Δ
@@ -87,3 +88,13 @@ mutual
   typingsub (<> {Γ = Γ}) = ⊢<> (typingctx Γ)
   typingsub (p {A = A})  = ⊢p (typingty A)
   typingsub < γ , a >    = ⊢<,> (typingsub γ) (typingty _) (typingtm a)
+
+mutual
+
+  joinctx : ∀ {n} → Σ (Ctx n) (_⊢) → Ctx⋆ n
+  joinctx (⋄ Σ., _)                 = ⋄
+  joinctx ((Γ ∙ A) Σ., c-ext Γ⊢ ⊢A) = (joinctx (Γ Σ., Γ⊢)) , {!!}
+
+  jointy : ∀ {n} {Γ : Ctx n} (s : Σ (RTm n) (Γ ⊢_)) → Ty (joinctx (Γ Σ., lemma-1 (Σ.proj₂ s))) -- that's one ugly type
+  jointy s = {!!}
+
